@@ -25,8 +25,8 @@ else:
 def saveId( file,  id):
 	with open(file, "a") as f:
 			f.write(id + "\n")
-			
-#----------------------The bot main function-----------------------------------
+
+
 def replyToThreads():
 	comments = subreddit.stream.comments()
 	for comment in comments:
