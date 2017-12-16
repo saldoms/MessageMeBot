@@ -8,7 +8,7 @@ regex = (r"(im|i'm|me|i have|am|having|feeling|feel|feels|have|we|us)\s.{0,17}(i
 	r")")
 if re.search(regex,"Hey everyone! I like cookies and coke and im feeling sad :(",re.IGNORECASE):
 	print("Test 1: Passed")
-if re.search(regex,"Hey everyone! I like cookies sad and coke and im feeling super happy sad :(",re.IGNORECASE):
+if re.search(regex,"Hey everyone! I like cookies sad and coke and im feeling super duper happily sad :(",re.IGNORECASE):
 	print("Test 2: Failed")
 else:
 	print ("Test 2: Passed")
@@ -69,7 +69,7 @@ def replyToPrivateMessages():
 			#print(message)
 
 bot = praw.Reddit('bot1')
-subreddit = bot.subreddit('testingground4bots') #+meirl+2meirl4meirl
+subreddit = bot.subreddit('testingground4bots+meirl+2meirl4meirl')
 print(bot.user.me())
 
 if not os.path.isfile("posts_replied_to.txt"):
