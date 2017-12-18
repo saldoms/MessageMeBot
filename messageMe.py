@@ -4,8 +4,7 @@ import os
 import re
 import threading
 
-regex = (r"(im|i'm|me|i have|am|having|feeling|feel|feels|have|we|us)\s.{0,17}(insecure|insecurity|depressed|depression|self harm| self-harm|empty|dead|suicidal|unhappy|despondent|troubled|angry|remorseful|destructive|sad|bitter|dismal|heartbroken|melancholy|mournful|pessimistic|somber|sorrowful|wistful|bereaved|blue|cheerless|dejected|despairing|despondent|disconsolate|distressed|doleful|down|down in dumps|down in mouth|downcast|for lorn|gloomy|glum|grief-stricken|grieved|heartsick|heavy hearted|hurting|in doldrums|in grief|in the dumps|languishing|low|low-spirited|lugubrious|morbid|morose|out of sorts|pensive|troubled|weeping|woebegone\n"
-	r")")
+regex = r"(^|\s)(im|i'm|me|i have|am|having|feeling|feel|feels|have|we|us)(\s|\s.{1,17}\s)(insecure|insecurity|depressed|depression|self harm| self-harm|empty|dead|suicidal|unhappy|despondent|troubled|angry|remorseful|destructive|sad|bitter|dismal|heartbroken|melancholy|mournful|pessimistic|somber|sorrowful|wistful|bereaved|blue|cheerless|dejected|despairing|despondent|disconsolate|distressed|doleful|down|down in dumps|down in mouth|downcast|for lorn|gloomy|glum|grief-stricken|grieved|heartsick|heavy hearted|hurting|in doldrums|in grief|in the dumps|languishing|low|low-spirited|lugubrious|morbid|morose|out of sorts|pensive|troubled|weeping|woebegone)($|\s)"
 if re.search(regex,"Hey everyone! I like cookies and coke and im feeling sad :(",re.IGNORECASE):
 	print("Test 1: Passed")
 if re.search(regex,"Hey everyone! I like cookies sad and coke and im feeling super duper happily sad :(",re.IGNORECASE):
@@ -19,12 +18,12 @@ else:
 if re.search(regex,"I'm sorry to hear that :( ",re.IGNORECASE):
 	print("Test 4: Failed")
 else:
-	print ("Test 4: Passed")
+	print("Test 4: Passed")
 
 
-def saveId( file,  id):
+def saveId(file,  id):
 	with open(file, "a") as f:
-			f.write(id + "\n")
+		f.write(id + "\n")
 
 
 def replyToThreads():
@@ -33,7 +32,7 @@ def replyToThreads():
 		body = comment.body
 		author = comment.author
 		matches = re.finditer(regex, body, re.IGNORECASE)
-		if re.search(regex,body,re.IGNORECASE):
+		if re.search(regex,body, re.IGNORECASE):
 			thread = comment.submission
 			if thread.id not in posts_replied_to:
 				message = ("Hey u/{0}! I'm a bot and not capable of reading. "
@@ -47,7 +46,7 @@ def replyToThreads():
 					print("Post was: ", body)
 					posts_replied_to.append(thread.id)
 					saveId("posts_replied_to.txt", thread.id)
-				except praw.exceptions.APIException as error:
+				except Exception as error:
 					print("Error: Couldn't reply to u/{0}, \n post was: {1} \n error message was: {2}".format(author,body, error.message))
 				#print(message)
 #similair to above, duplicated code!
@@ -64,7 +63,7 @@ def replyToPrivateMessages():
 				print("Post was: ", body)
 				messages_replied_to.append(message.id)
 				saveId("messages_replied_to.txt", message.id)
-			except praw.exceptions.APIException as error:
+			except Exception as error:
 				print("Error: Couldn't reply to u/{0}, \n private message was: {1} \n error message was: {2}".format(author,body, error.message))
 			#print(message)
 
