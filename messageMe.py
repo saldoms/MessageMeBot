@@ -4,7 +4,7 @@ import os
 import re
 import threading
 
-regex = r"(^|\s)(im|i'm|me|i have|am|having|feeling|feel|feels|have|we|us)(\s|\s.{1,17}\s)(insecure|insecurity|depressed|depression|self harm| self-harm|empty|dead|suicidal|unhappy|despondent|troubled|angry|remorseful|destructive|sad|bitter|dismal|heartbroken|melancholy|mournful|pessimistic|somber|sorrowful|wistful|bereaved|blue|cheerless|dejected|despairing|despondent|disconsolate|distressed|doleful|down|down in dumps|down in mouth|downcast|for lorn|gloomy|glum|grief-stricken|grieved|heartsick|heavy hearted|hurting|in doldrums|in grief|in the dumps|languishing|low|low-spirited|lugubrious|morbid|morose|out of sorts|pensive|troubled|weeping|woebegone)($|\s)"
+regex = r"(^|\s)(im|i'm|me|i have|am|feeling|feel|feels|we|us)(\s|\s.{1,17}\s)(insecure|insecurity|depressed|depression|self harm| self-harm|empty|dead|suicidal|unhappy|despondent|troubled|angry|remorseful|destructive|sad|bitter|dismal|heartbroken|melancholy|mournful|pessimistic|somber|sorrowful|wistful|bereaved|blue|cheerless|dejected|despairing|despondent|disconsolate|distressed|doleful|down|down in dumps|down in mouth|downcast|for lorn|gloomy|glum|grief-stricken|grieved|heartsick|heavy hearted|hurting|in doldrums|in grief|in the dumps|languishing|low|low-spirited|lugubrious|morbid|morose|out of sorts|pensive|troubled|weeping|woebegone)($|\s)"
 if re.search(regex,"Hey everyone! I like cookies and coke and im feeling sad :(",re.IGNORECASE):
 	print("Test 1: Passed")
 if re.search(regex,"Hey everyone! I like cookies sad and coke and im feeling super duper happily sad :(",re.IGNORECASE):
