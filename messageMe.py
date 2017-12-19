@@ -4,7 +4,7 @@ import os
 import re
 import threading
 
-regex = r"(^|\s)(im|i'm|me|i have|am|feeling|feel|feels|we|us)(\s|\s.{1,17}\s)(insecure|insecurity|depressed|depression|self harm| self-harm|empty|dead|suicidal|unhappy|despondent|troubled|angry|remorseful|destructive|sad|bitter|dismal|heartbroken|melancholy|mournful|pessimistic|somber|sorrowful|wistful|bereaved|blue|cheerless|dejected|despairing|despondent|disconsolate|distressed|doleful|down|down in dumps|down in mouth|downcast|for lorn|gloomy|glum|grief-stricken|grieved|heartsick|heavy hearted|hurting|in doldrums|in grief|in the dumps|languishing|low|low-spirited|lugubrious|morbid|morose|out of sorts|pensive|troubled|weeping|woebegone)($|\s)"
+regex = r"(^|\s)(im|i'm|me|i have|am|feeling|feel|feels|we|us)(\s|\s.{1,17}\s)(insecure|insecurity|depressed|depression|self harm| self-harm|empty|dead|suicidal|unhappy|despondent|troubled|angry|remorseful|destructive|sad|bitter|dismal|heartbroken|melancholy|mournful|pessimistic|somber|sorrowful|wistful|bereaved|blue|cheerless|dejected|despairing|despondent|disconsolate|distressed|doleful|down in dumps|down in mouth|downcast|for lorn|gloomy|glum|grief-stricken|grieved|heartsick|heavy hearted|hurting|in doldrums|in grief|in the dumps|languishing|low|low-spirited|lugubrious|morbid|morose|out of sorts|pensive|troubled|weeping|woebegone)($|\s)"
 if re.search(regex,"Hey everyone! I like cookies and coke and im feeling sad :(",re.IGNORECASE):
 	print("Test 1: Passed")
 if re.search(regex,"Hey everyone! I like cookies sad and coke and im feeling super duper happily sad :(",re.IGNORECASE):
@@ -46,8 +46,8 @@ def replyToThreads():
 					print("Post was: ", body)
 					posts_replied_to.append(thread.id)
 					saveId("posts_replied_to.txt", thread.id)
-				except Exception as error:
-					print("Error: Couldn't reply to u/{0}, \n post was: {1} \n error message was: {2}".format(author,body, error.message))
+				except BaseException as e:
+					print("Error: Couldn't reply to u/{0}, \n post was: {1} \n error message was: {2}".format(author,body, str(e)))
 				#print(message)
 #similair to above, duplicated code!
 def replyToPrivateMessages():
@@ -63,12 +63,12 @@ def replyToPrivateMessages():
 				print("Post was: ", body)
 				messages_replied_to.append(message.id)
 				saveId("messages_replied_to.txt", message.id)
-			except Exception as error:
-				print("Error: Couldn't reply to u/{0}, \n private message was: {1} \n error message was: {2}".format(author,body, error.message))
+			except BaseException as e:
+				print("Error: Couldn't reply to u/{0}, \n private message was: {1} \n error message was: {2}".format(author,body, str(e)))
 			#print(message)
 
 bot = praw.Reddit('bot1')
-subreddit = bot.subreddit('testingground4bots+meirl+2meirl4meirl')
+subreddit = bot.subreddit('testingground4bots+meirl+2meirl4meirl+dankmemes+funny+memes')
 print(bot.user.me())
 
 if not os.path.isfile("posts_replied_to.txt"):
