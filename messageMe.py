@@ -58,7 +58,7 @@ def replyToPrivateMessages():
 		if message.id not in messages_replied_to:
 			response = ("Your problems suddenly feel smaller! Or perhaps the same. Something feels different though, of that you are sure. Quite sure atleast... \n\n <3 \n\n *~beep boop~*")
 			try:
-				#message.reply(response)
+				message.reply(response)
 				print("Bot replying to u/{0} in private message: ".format(author))
 				print("Post was: ", body)
 				messages_replied_to.append(message.id)
@@ -68,7 +68,7 @@ def replyToPrivateMessages():
 			#print(message)
 
 bot = praw.Reddit('bot1')
-subreddit = bot.subreddit('testingground4bots+meirl+2meirl4meirl+dankmemes+funny+memes')
+subreddit = bot.subreddit('testingground4bots+meirl+2meirl4meirl+dankmemes+memes')
 print(bot.user.me())
 
 if not os.path.isfile("posts_replied_to.txt"):
