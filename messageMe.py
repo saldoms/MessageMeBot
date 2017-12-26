@@ -4,7 +4,7 @@ import os
 import re
 import threading
 
-regex = r"(^|\s)(im|i'm|me|i have|am|feeling|feel|feels|we|us)(\s|\s.{1,17}\s)(insecure|insecurity|depressed|depression|self harm| self-harm|empty|dead|suicidal|unhappy|despondent|troubled|angry|remorseful|destructive|sad|bitter|dismal|heartbroken|melancholy|mournful|pessimistic|somber|sorrowful|wistful|bereaved|blue|cheerless|dejected|despairing|despondent|disconsolate|distressed|doleful|down in dumps|down in mouth|downcast|for lorn|gloomy|glum|grief-stricken|grieved|heartsick|heavy hearted|hurting|in doldrums|in grief|in the dumps|languishing|low|low-spirited|lugubrious|morbid|morose|out of sorts|pensive|troubled|weeping|woebegone)($|\s)"
+regex = r"(^|\s)(im|i'm|me|i have|am|feeling|feel|feels|we|us)(\s|\s.{1,14}\s)(insecure|insecurity|depressed|depression|self harm| self-harm|empty|dead|suicidal|unhappy|despondent|troubled|angry|remorseful|destructive|sad|bitter|dismal|heartbroken|melancholy|mournful|pessimistic|somber|sorrowful|wistful|bereaved|blue|cheerless|dejected|despairing|despondent|disconsolate|distressed|doleful|down in dumps|down in mouth|downcast|for lorn|gloomy|glum|grief-stricken|grieved|heartsick|heavy hearted|hurting|in doldrums|in grief|in the dumps|languishing|low|low-spirited|lugubrious|morbid|morose|out of sorts|pensive|troubled|weeping|woebegone)($|\s)"
 if re.search(regex,"Hey everyone! I like cookies and coke and im feeling sad :(",re.IGNORECASE):
 	print("Test 1: Passed")
 if re.search(regex,"Hey everyone! I like cookies sad and coke and im feeling super duper happily sad :(",re.IGNORECASE):
@@ -58,7 +58,7 @@ def replyToPrivateMessages():
 		if message.id not in messages_replied_to:
 			response = ("Your problems suddenly feel smaller! Or perhaps the same. Something feels different though, of that you are sure. Quite sure atleast... \n\n <3 \n\n *~beep boop~*")
 			try:
-				message.reply(response)
+				#message.reply(response)
 				print("Bot replying to u/{0} in private message: ".format(author))
 				print("Post was: ", body)
 				messages_replied_to.append(message.id)
@@ -86,9 +86,11 @@ else:
 	   messages_replied_to = f.read()
 	   messages_replied_to = messages_replied_to.split("\n")
 	   messages_replied_to = list(filter(None, messages_replied_to))
+try:
+	threadComment = threading.Thread(target=replyToThreads)
+	threadComment.start()
 
-threadComment = threading.Thread(target=replyToThreads)
-threadComment.start()
-
-threadMessageReply = threading.Thread(target=replyToPrivateMessages)
-threadMessageReply.start()
+	threadMessageReply = threading.Thread(target=replyToPrivateMessages)
+	threadMessageReply.start()
+except BaseException as e:
+	print("Error when printing error: " +str(e) )
